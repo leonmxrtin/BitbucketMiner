@@ -28,7 +28,7 @@ public class ProjectService {
     // TODO: add commit and issue logic
     public Project getProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
             throws ProjectNotFoundException {
-        String uri = baseUri + apiVersion + "/repositories/" + workspace + "/" + repoSlug + "?nCommits=" + nCommits + "&nIssues=" + nIssues + "&maxPages=" + maxPages;
+        String uri = baseUri + apiVersion + "/repositories/" + workspace + "/" + repoSlug + "?pageLen=" + maxPages;
         ResponseEntity<Project> response = restTemplate.getForEntity(uri, Project.class);
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new ProjectNotFoundException();
@@ -36,12 +36,14 @@ public class ProjectService {
         Project project = response.getBody();
         project.setWeb_url(baseUri + project.getName());
 //        Commit[] commits = restTemplate.getForObject(uri + "/commits", Commit[].class);
-//        Issue[] issues = restTemplate.getForObject(uri + "/issued", Issue[].class);
+//        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(commits)) {
-//            project.setCommits(Arrays.stream(commits).toList());
+//            commits = Arrays.stream(commits).toList().limit(nCommits);
+//            project.setCommits(commits);
 //        }
 //        if (!isNull(issues)) {
-//            project.setIssues(Arrays.stream(issues).toList());
+//            issues = Arrays.stream(issues).toList().limit(nIssues);
+//            project.setIssues(issues);
 //        }
         return project;
 

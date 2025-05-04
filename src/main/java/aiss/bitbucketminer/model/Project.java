@@ -59,18 +59,9 @@ public class Project {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(Project.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append(',');
-        sb.append("uuid");
+        sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("name");
-        sb.append('=');
-        sb.append(((this.name == null)?"<null>":this.name));
-        sb.append(',');
-        sb.append("web_url");
-        sb.append('=');
-        sb.append(((this.web_url == null)?"<null>":this.web_url));
         sb.append(',');
         sb.append("commits");
         sb.append('=');
@@ -79,6 +70,8 @@ public class Project {
         sb.append("issues");
         sb.append('=');
         sb.append(((this.issues == null)?"<null>":this.issues));
+        sb.append(',');
+
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
