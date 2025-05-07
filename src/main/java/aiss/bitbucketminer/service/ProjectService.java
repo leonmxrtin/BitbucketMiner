@@ -30,11 +30,12 @@ public class ProjectService {
             throws ProjectNotFoundException {
         String uri = baseUri + apiVersion + "/repositories/" + workspace + "/" + repoSlug + "?pageLen=" + maxPages;
         ResponseEntity<Project> response = restTemplate.getForEntity(uri, Project.class);
-        if (response.getStatusCode() != HttpStatus.OK) {
+
+        if (response.getStatusCode() != HttpStatus.OK || response.getBody() == null) {
             throw new ProjectNotFoundException();
         }
+
         Project project = response.getBody();
-        project.setWeb_url(baseUri + project.getName());
 //        Commit[] commits = restTemplate.getForObject(uri + "/commits", Commit[].class);
 //        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(commits)) {
