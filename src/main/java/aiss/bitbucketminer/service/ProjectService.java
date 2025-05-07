@@ -1,5 +1,6 @@
 package aiss.bitbucketminer.service;
 
+import aiss.bitbucketminer.controller.ProjectController;
 import aiss.bitbucketminer.exception.ProjectNotFoundException;
 import aiss.bitbucketminer.model.Commit;
 import aiss.bitbucketminer.model.Issue;
@@ -25,6 +26,8 @@ public class ProjectService {
     private final String baseUri = "https://api.bitbucket.org";
     private final String apiVersion = "/2.0";
 
+    private final String gitMinerUri = "http://localhost:8080/gitminer/projects";
+
     // TODO: add commit and issue logic
     public Project getProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
             throws ProjectNotFoundException {
@@ -34,7 +37,6 @@ public class ProjectService {
             throw new ProjectNotFoundException();
         }
         Project project = response.getBody();
-        project.setWeb_url(baseUri + project.getName());
 //        Commit[] commits = restTemplate.getForObject(uri + "/commits", Commit[].class);
 //        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(commits)) {
@@ -47,5 +49,11 @@ public class ProjectService {
 //        }
         return project;
 
+    }
+
+    public Project createProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
+            throws ProjectNotFoundException {
+        Project project = getProject(workspace, repoSlug, nCommits, nIssues, maxPages);
+        return restTemplate.postForObject(gitMinerUri, project, Project.class);
     }
 }

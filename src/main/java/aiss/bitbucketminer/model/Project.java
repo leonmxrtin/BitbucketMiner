@@ -10,9 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
 
-    @JsonProperty("uuid")
     private String id;
-    @JsonProperty("name")
     private String name;
     private String web_url;
     private List<Commit> commits;
@@ -23,11 +21,10 @@ public class Project {
         issues = new ArrayList<>();
     }
 
-    @JsonProperty("uuid")
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
-
     @JsonProperty("uuid")
     public void setId(String uuid) {
         this.id = uuid;
@@ -37,22 +34,24 @@ public class Project {
     public String getName() {
         return name;
     }
-
     @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
 
+    @JsonProperty("web_url")
     public String getWeb_url() { return web_url; }
-
+    @JsonProperty("website")
     public void setWeb_url(String web_url) { this.web_url = web_url; }
 
+    @JsonProperty("commits")
     public List<Commit> getCommits() { return commits; }
-
+    @JsonProperty("commits")
     public void setCommits(List<Commit> commits) { this.commits = commits; }
 
+    @JsonProperty("issues")
     public List<Issue> getIssues() { return issues; }
-
+    @JsonProperty("issues")
     public void setIssues(List<Issue> issues) { this.issues = issues; }
 
     @Override

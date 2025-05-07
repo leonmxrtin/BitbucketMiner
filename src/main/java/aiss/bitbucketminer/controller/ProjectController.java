@@ -27,5 +27,15 @@ public class ProjectController {
             throws ProjectNotFoundException {
         return projectService.getProject(workspace, repo_slug, nCommits, nIssues, maxPages);
     }
+
+    @PostMapping("/{workspace}/{repo_slug}")
+    public Project createProject(@PathVariable String workspace,
+                                 @PathVariable String repo_slug,
+                                 @RequestParam(defaultValue = "5") Integer nCommits,
+                                 @RequestParam(defaultValue = "5") Integer nIssues,
+                                 @RequestParam(defaultValue = "2") Integer maxPages)
+            throws ProjectNotFoundException {
+        return projectService.getProject(workspace, repo_slug, nCommits, nIssues, maxPages);
+    }
 }
 
