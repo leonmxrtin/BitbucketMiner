@@ -9,14 +9,13 @@ import java.util.regex.Pattern;
 
 public class Commit {
 
-    @JsonProperty("id")
     @JsonAlias("hash")
     private String id;
 
-    @JsonProperty("title")
     private String title;
 
     private String message;
+
     @JsonProperty("message")
     private void parseMessage(String message) {
         this.message = this.title = message;

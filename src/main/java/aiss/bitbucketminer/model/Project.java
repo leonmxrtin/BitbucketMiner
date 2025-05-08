@@ -11,10 +11,8 @@ import java.util.List;
 public class Project {
 
     @JsonAlias("uuid")
-    @JsonProperty("id")
     private String id;
 
-    @JsonProperty("name")
     private String name;
 
     @JsonProperty("web_url")
