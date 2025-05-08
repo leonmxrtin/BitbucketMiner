@@ -3,7 +3,6 @@ package aiss.bitbucketminer.controller;
 import aiss.bitbucketminer.exception.ProjectNotFoundException;
 import aiss.bitbucketminer.model.Project;
 import aiss.bitbucketminer.service.ProjectService;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -35,7 +34,7 @@ public class ProjectController {
                                  @RequestParam(defaultValue = "5") Integer nIssues,
                                  @RequestParam(defaultValue = "2") Integer maxPages)
             throws ProjectNotFoundException {
-        return projectService.getProject(workspace, repo_slug, nCommits, nIssues, maxPages);
+        return projectService.createProject(workspace, repo_slug, nCommits, nIssues, maxPages);
     }
 }
 
