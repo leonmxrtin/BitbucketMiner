@@ -21,7 +21,7 @@ public class CommitService {
         List<Commit> commits = new ArrayList<>();
 
         // Fetch data from the API until limits are satisfied
-        for (int page = 1; page < maxPages; page++) {
+        for (int page = 1; page <= maxPages; page++) {
             String commitUri = repoUri + "/commits" + "?pagelen=" + pageLen + "&page=" + page;
             Page<Commit> fetchedPage = restTemplate.exchange(commitUri, HttpMethod.GET, null,
                     new ParameterizedTypeReference<Page<Commit>>(){}).getBody();
