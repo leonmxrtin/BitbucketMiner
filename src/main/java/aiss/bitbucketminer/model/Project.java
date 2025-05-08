@@ -1,6 +1,7 @@
 
 package aiss.bitbucketminer.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -9,12 +10,14 @@ import java.util.List;
 
 public class Project {
 
-    @JsonProperty("uuid")
+    @JsonAlias("uuid")
+    @JsonProperty("id")
     private String id;
 
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("web_url")
     private String webUrl;
     @JsonProperty("links")
     private void unpackWebUrl(JsonNode links) {
