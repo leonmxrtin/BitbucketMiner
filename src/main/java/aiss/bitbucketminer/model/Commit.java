@@ -53,8 +53,6 @@ public class Commit {
         this.webUrl = links.get("html").get("href").asText();
     }
 
-    private Project project;
-
     public String getId() {
         return id;
     }
@@ -111,14 +109,6 @@ public class Commit {
         this.webUrl = webUrl;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
     @Override
     public String toString() {
         return "Commit{" +
@@ -129,7 +119,6 @@ public class Commit {
                 ", authorEmail='" + authorEmail + '\'' +
                 ", authoredDate='" + authoredDate + '\'' +
                 ", webUrl='" + webUrl + '\'' +
-                ", project=" + project +
                 '}';
     }
 }

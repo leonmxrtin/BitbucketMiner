@@ -32,7 +32,6 @@ public class IssueService {
             throw new IssueNotFoundException();
         }
         Issue issue = response.getBody();
-        issue.setWebUrl(baseUri + issue.getTitle());
         return issue;
     }
 }

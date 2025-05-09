@@ -20,7 +20,6 @@ public class Issue {
     private String title;
     private String state;
     private Integer votes;
-    private Project project;
     private User author;
     private User assignee;
     private List<Comment> comments;
@@ -118,14 +117,6 @@ public class Issue {
         this.votes = votes;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
     public User getAuthor() {
         return author;
     }
@@ -148,5 +139,22 @@ public class Issue {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", state='" + state + '\'' +
+                ", votes=" + votes +
+                ", author=" + author +
+                ", assignee=" + assignee +
+                ", comments=" + comments +
+                ", description='" + description + '\'' +
+                ", labels=" + labels +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                '}';
     }
 }
