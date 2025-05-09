@@ -18,6 +18,9 @@ public class ProjectService {
     @Autowired
     CommitService commitService;
 
+    @Autowired
+    IssueService issueService;
+
     @Value("${bitbucket.uri}")
     private String bitbucketUri;
 
@@ -37,6 +40,7 @@ public class ProjectService {
         Project project = response.getBody();
 
         project.setCommits(commitService.getCommits(workspace, repoSlug, nCommits, maxPages));
+        project.setIssues(issueService.getIssues(workspace, repoSlug, nIssues, maxPages));
 
 //        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(issues)) {
