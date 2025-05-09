@@ -36,7 +36,7 @@ public class ProjectService {
         }
 
         Project project = response.getBody();
-        project.setCommits(commitService.getCommits(repoUri, nCommits, maxPages));
+        project.setCommits(commitService.getCommits(workspace, repoSlug, nCommits, maxPages));
 
 //        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(issues)) {
