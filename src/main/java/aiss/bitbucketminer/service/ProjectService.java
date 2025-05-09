@@ -1,6 +1,7 @@
 package aiss.bitbucketminer.service;
 
 import aiss.bitbucketminer.exception.ProjectNotFoundException;
+import aiss.bitbucketminer.model.Commit;
 import aiss.bitbucketminer.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 
 @Service
@@ -36,7 +39,12 @@ public class ProjectService {
         }
 
         Project project = response.getBody();
-        project.setCommits(commitService.getCommits(workspace, repoSlug, nCommits, maxPages));
+
+        List<Commit> commits = commitService.getCommits(workspace, repoSlug, nCommits, maxPages);
+        for (Commit commit : commits) {
+            commit.setProject(project);
+        }
+        project.setCommits(commits);
 
 //        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
 //        if (!isNull(issues)) {
