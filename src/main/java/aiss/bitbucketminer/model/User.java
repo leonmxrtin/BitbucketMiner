@@ -2,6 +2,7 @@ package aiss.bitbucketminer.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class User {
 
@@ -19,6 +20,12 @@ public class User {
 
     @JsonProperty("web_url")
     private String webUrl;
+
+    @JsonProperty("links")
+    private void unpackLinks(JsonNode links) {
+        this.webUrl = links.get("html").get("href").asText();
+        this.avatarUrl = links.get("html").get("href").asText();
+    }
 
     public String getId() {
         return id;
