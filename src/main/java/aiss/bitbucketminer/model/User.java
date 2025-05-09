@@ -24,7 +24,7 @@ public class User {
     @JsonProperty("links")
     private void unpackLinks(JsonNode links) {
         this.webUrl = links.get("html").get("href").asText();
-        this.avatarUrl = links.get("html").get("href").asText();
+        this.avatarUrl = links.get("avatar").get("href").asText();
     }
 
     public String getId() {
