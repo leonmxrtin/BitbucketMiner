@@ -19,19 +19,19 @@ import java.util.List;
 public class CommitService {
 
     @Autowired
-    RestTemplate restTemplate;
+    RestTemplate restBitBucket;
 
     @Value("${bitbucket.uri}")
     private String bitbucketUri;
 
     public List<Commit> getCommits(String workspace, String repoSlug, Integer pageLen, Integer maxPages) throws PageNotFoundException {
-        String commitsUri = bitbucketUri + "/repositories/" + workspace + "/" + repoSlug + "/commits";
+        String commitsUri = "/repositories/" + workspace + "/" + repoSlug + "/commits";
         String pageUri = commitsUri + "?pagelen=" + pageLen + "&page=1";
         List<Commit> commits = new ArrayList<>();
 
         // Fetch data from the API until limits are satisfied or no more pages exist
         for (int page = 1; page <= maxPages; page++) {
-            ResponseEntity<Page<Commit>> response = restTemplate.exchange(pageUri, HttpMethod.GET, null,
+            ResponseEntity<Page<Commit>> response = restBitBucket.exchange(pageUri, HttpMethod.GET, null,
                     new ParameterizedTypeReference<>(){});
 
             if (response.getStatusCode() != HttpStatus.OK || response.getBody() == null) {

@@ -19,19 +19,16 @@ import java.util.List;
 public class CommentService {
 
     @Autowired
-    RestTemplate restTemplate;
-
-    @Value("${bitbucket.uri}")
-    private String bitbucketUri;
+    RestTemplate restBitBucket;
 
     public List<Comment> getIssueComments(String workspace, String repoSlug, String issueId, Integer pageLen, Integer maxPages) throws PageNotFoundException {
-        String commentsUri = bitbucketUri + "/repositories/" + workspace + "/" + repoSlug + "/issues/" + issueId + "/comments";
+        String commentsUri = "/repositories/" + workspace + "/" + repoSlug + "/issues/" + issueId + "/comments";
         String pageUri = commentsUri + "?pagelen=" + pageLen + "&page=1";
         List<Comment> comments = new ArrayList<>();
 
         // Fetch data from the API until limits are satisfied or no more pages exist
         for (int page = 1; page <= maxPages; page++) {
-            ResponseEntity<Page<Comment>> response = restTemplate.exchange(pageUri, HttpMethod.GET, null,
+            ResponseEntity<Page<Comment>> response = restBitBucket.exchange(pageUri, HttpMethod.GET, null,
                     new ParameterizedTypeReference<>(){});
 
             if (response.getStatusCode() != HttpStatus.OK || response.getBody() == null) {

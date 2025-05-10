@@ -19,22 +19,19 @@ import java.util.List;
 public class IssueService {
 
     @Autowired
-    RestTemplate restTemplate;
+    RestTemplate restBitBucket;
 
     @Autowired
     CommentService commentService;
 
-    @Value("${bitbucket.uri}")
-    private String bitbucketUri;
-
     public List<Issue> getIssues(String workspace, String repoSlug, Integer pageLen, Integer maxPages) throws PageNotFoundException {
-        String issuesUri = bitbucketUri + "/repositories/" + workspace + "/" + repoSlug + "/issues";
+        String issuesUri = "/repositories/" + workspace + "/" + repoSlug + "/issues";
         String pageUri = issuesUri + "?pagelen=" + pageLen + "&page=1";
         List<Issue> issues = new ArrayList<>();
 
         // Fetch data from the API until limits are satisfied or no more pages exist
         for (int page = 1; page <= maxPages; page++) {
-            ResponseEntity<Page<Issue>> response = restTemplate.exchange(pageUri, HttpMethod.GET, null,
+            ResponseEntity<Page<Issue>> response = restBitBucket.exchange(pageUri, HttpMethod.GET, null,
                     new ParameterizedTypeReference<>(){});
 
             if (response.getStatusCode() != HttpStatus.OK || response.getBody() == null) {
