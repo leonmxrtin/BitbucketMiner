@@ -1,5 +1,6 @@
 package aiss.bitbucketminer.service;
 
+import aiss.bitbucketminer.exception.PageNotFoundException;
 import aiss.bitbucketminer.exception.ProjectNotFoundException;
 import aiss.bitbucketminer.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,8 @@ public class ProjectService {
     @Value("${gitminer.uri}")
     private String gitminerUri;
 
-    // TODO: add commit and issue logic
     public Project getProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
-            throws ProjectNotFoundException {
+            throws ProjectNotFoundException, PageNotFoundException {
         String repoUri = bitbucketUri + "/repositories/" + workspace + "/" + repoSlug;
         ResponseEntity<Project> response = restTemplate.getForEntity(repoUri, Project.class);
 
@@ -42,17 +42,12 @@ public class ProjectService {
         project.setCommits(commitService.getCommits(workspace, repoSlug, nCommits, maxPages));
         project.setIssues(issueService.getIssues(workspace, repoSlug, nIssues, maxPages));
 
-//        Issue[] issues = restTemplate.getForObject(uri + "/issues", Issue[].class);
-//        if (!isNull(issues)) {
-//            issues = Arrays.stream(issues).toList().limit(nIssues);
-//            project.setIssues(issues);
-//        }
         return project;
 
     }
 
     public Project createProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
-            throws ProjectNotFoundException {
+            throws ProjectNotFoundException, PageNotFoundException {
         Project project = getProject(workspace, repoSlug, nCommits, nIssues, maxPages);
         return restTemplate.postForObject(gitminerUri + "/projects", project, Project.class);
     }
