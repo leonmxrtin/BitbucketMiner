@@ -35,11 +35,11 @@ public class Issue {
     private List<String> labels;
     @JsonProperty("kind")
     private void parseKind(String kind) {
-        labels.add(kind);
+        this.labels.add(kind);
     }
     @JsonProperty("priority")
     private void parsePriority(String priority) {
-        labels.add(priority);
+        this.labels.add(priority);
     }
 
     @JsonProperty("created_at")
