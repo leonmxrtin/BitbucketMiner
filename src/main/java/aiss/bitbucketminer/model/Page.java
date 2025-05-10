@@ -38,4 +38,14 @@ public class Page<T> {
     public void setPrevious(String previous) {
         this.previous = previous;
     }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "values=" + values +
+                ", pagelen=" + pagelen +
+                ", next='" + next + '\'' +
+                ", previous='" + previous + '\'' +
+                '}';
+    }
 }

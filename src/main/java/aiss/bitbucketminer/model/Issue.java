@@ -20,9 +20,11 @@ public class Issue {
     private String title;
     private String state;
     private Integer votes;
-    private User author;
-    private User assignee;
     private List<Comment> comments;
+    private User assignee;
+
+    @JsonAlias("reporter")
+    private User author;
 
     private String description;
     @JsonProperty("content")
