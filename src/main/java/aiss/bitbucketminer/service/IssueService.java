@@ -4,7 +4,6 @@ import aiss.bitbucketminer.exception.PageNotFoundException;
 import aiss.bitbucketminer.model.Issue;
 import aiss.bitbucketminer.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
