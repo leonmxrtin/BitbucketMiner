@@ -5,7 +5,6 @@ import aiss.bitbucketminer.exception.ProjectNotFoundException;
 import aiss.bitbucketminer.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,7 +41,6 @@ public class ProjectService {
         project.setIssues(issueService.getIssues(workspace, repoSlug, nIssues, maxPages));
 
         return project;
-
     }
 
     public Project createProject(String workspace, String repoSlug, Integer nCommits, Integer nIssues, Integer maxPages)
